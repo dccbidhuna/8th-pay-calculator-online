@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8th Pay CPC Salary Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+        }
+
+        header {
+            background-color: #1a237e;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .ads {
+            background-color: #fff;
+            width: 160px;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #ccc;
+        }
+
+        .calculator {
+            flex: 1;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #303f9f;
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+
+        footer {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .ads {
+                width: 100%;
+                height: 150px;
+                order: -1;
+            }
+
+            .calculator {
+                order: 1;
+            }
+
+            footer {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>8th Pay Commission Salary Calculator</h1>
+        <p>Calculate your updated salary as per latest pay commission</p>
+    </header>
+
+    <div class="container">
+        <div class="ads left-ad">
+            <!-- Google AdSense Left Ad -->
+            Left Ad Space (300x600)
+        </div>
+
+        <div class="calculator">
+            <div class="input-group">
+                <label for="basic-pay">Basic Pay</label>
+                <input type="number" id="basic-pay" placeholder="Enter basic pay">
+            </div>
+
+            <div class="input-group">
+                <label for="allowances">Allowances (भत्ता)</label>
+                <input type="number" id="allowances" placeholder="Enter total allowances">
+            </div>
+
+            <div class="input-group">
+                <label for="deductions">Deductions</label>
+                <input type="number" id="deductions" placeholder="Enter total deductions">
+            </div>
+
+            <div class="input-group">
+                <label for="hra">HRA Percentage (40, 50%)</label>
+                <input type="number" id="hra" value="24" step="1">
+            </div>
+
+            <button onclick="calculateSalary()">Calculate Salary</button>
+
+            <div class="result" id="result">
+                <h3>Salary Breakdown:</h3>
+                <p>Gross Salary: ₹<span id="gross-salary">0</span></p>
+                <p>Net Salary: ₹<span id="net-salary">0</span></p>
+                <p>HRA: ₹<span id="hra-amount">0</span></p>
+            </div>
+        </div>
+
+        <div class="ads right-ad">
+            <!-- Google AdSense Right Ad -->
+            Right Ad Space (300x600)
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 8th Pay CPC Calculator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function calculateSalary() {
+            // Get input values
+            const basicPay = parseFloat(document.getElementById('basic-pay').value) || 0;
+            const allowances = parseFloat(document.getElementById('allowances').value) || 0;
+            const deductions = parseFloat(document.getElementById('deductions').value) || 0;
+            const hraPercentage = parseFloat(document.getElementById('hra').value) || 0;
+
+            // Calculate components
+            const hraAmount = (basicPay * hraPercentage) / 100;
+            const grossSalary = basicPay + allowances + hraAmount;
+            const netSalary = grossSalary - deductions;
+
+            // Update results
+            document.getElementById('gross-salary').textContent = grossSalary.toLocaleString();
+            document.getElementById('net-salary').textContent = netSalary.toLocaleString();
+            document.getElementById('hra-amount').textContent = hraAmount.toLocaleString();
+            
+            // Show result section
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
